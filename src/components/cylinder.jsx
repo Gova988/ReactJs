@@ -20,29 +20,22 @@ class Cylinder extends React.Component {
                 ...this.state,
                 cylinders : response.data
             })
-        }).catch((error) => {
-            this.setState({
-                ...this.state,
-                errorMsg : error.message
-            });
         })
+        .catch((err) => console.log(err));
     }
 
-    deleteCylinder = (cylinderid) => {
-        const dataUrl = `http://localhost:8080/cylinder/deleteCylinder`;
+    deleteCylinder = (cylinderId) => {
+        const dataUrl = `http://localhost:8080/cylinder/deleteCylinder/${cylinderId}`;
         axios.delete(dataUrl).then((response) => {
-            const cylinder = this.state.cylinders.filter((c) => c.cylinderid !==cylinderid);
+            const cylinder = this.state.cylinders.filter((c) => c.cylinderId !==cylinderId);
             this.setState({
                 ...this.state,
                 cylinders : cylinder
             });
-            alert(response.data.username + " delete successfully !!!");
-        }).catch((error) => {
-            this.setState({
-                ...this.state,
-                errorMsg : error.message
-            });
+            alert(response.data.cylinderId + " delete successfully !!!");
         })
+        .catch((err) => console.log(err));
+
     }
 
     render() { 
@@ -63,7 +56,7 @@ class Cylinder extends React.Component {
                                 <table className="table table-condensed table-sm table-light table-hover table-striped text-center border-warning">
                                     <thead className="table table-warning">
                                         <tr>
-                                            <th>cylinderid</th>
+                                            <th>cylinderId</th>
                                             <th>type</th>
                                             <th>weight</th>
                                             <th>strapColor</th>
@@ -75,7 +68,7 @@ class Cylinder extends React.Component {
                                     {this.state.cylinders.map((s) => {
                                                 return (
                                                     <tr>
-                                                        <td>{s.cylinderid}</td>
+                                                        <td>{s.cylinderId}</td>
                                                         <td>
                                                             {s.type}
                                                         </td>
@@ -92,17 +85,16 @@ class Cylinder extends React.Component {
                                                         </td>
                                                       
                                                         <td>
-                                                            <button className="btn btn-sm btn-outline-success">
-                                                                <i class="fas fa-edit" />
-                                                                &nbsp;&nbsp;
-                                                                Update
-                                                            </button>
-
+                                                           <Link to={'/cylinder/update/${s.cylinderId}'}
+                                                           className="btn btn-primary"
+                                                           >
+                                                               Update
+                                                           </Link>
                                                             <button
-                                                                className="btn btn-sm btn-outline-danger"
+                                                                className="btn  btn-danger"            
                                                                 onClick={() =>
                                                                     this.deleteCylinder(
-                                                                        s.id
+                                                                        s.cylinderId
                                                                     )
                                                                 }
                                                             >

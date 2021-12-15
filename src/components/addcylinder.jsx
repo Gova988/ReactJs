@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 class AddCylinder extends React.Component {
     state = {
         cylinder: {
-            cylinderid: "",
+            cylinderId: "",
             type: "",
             weight: "",
             strapColor: "",
@@ -36,7 +36,7 @@ class AddCylinder extends React.Component {
                 console.log(response.data);
                 alert(
                     "Added Cylinder " +
-                        this.state.cylinder.cylinderid +
+                        this.state.cylinder.cylinderId +
                         " successfully !!!"
                 );
                 this.props.history.push("/cylinder");
@@ -74,22 +74,22 @@ class AddCylinder extends React.Component {
                                     >
                                         <div className="mb-2">
                                             <label
-                                                htmlFor="cylinderid"
+                                                htmlFor="cylinderId"
                                                 className="form-label fw-bold text-black"
                                             >
-                                                cylinderid
+                                                cylinderId
                                             </label>
                                             <input
                                                 type="text"
                                                 className="form-control"
                                                 // placeholder="cylinderid"
-                                                id="cylinderid"
-                                                name="cylinderid"
-                                                value={cylinder.cylinderid}
+                                                id="cylinderId"
+                                                name="cylinderId"
+                                                value={cylinder.cylinderId}
                                                 onChange={this.updateInput}
                                             />
                                             {errors && (
-                                                <small>{errors.cylinderid}</small>
+                                                <small>{errors.cylinderId}</small>
                                             )}
                                         </div>
                                         <div className="mb-2">

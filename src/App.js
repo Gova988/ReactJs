@@ -6,7 +6,7 @@ import Login from "./components/login";
 import Cylinder from "./components/cylinder";
 import PageNotFound from "./components/pagenotfound";
 import AddCylinder from "./components/addcylinder";
-import UpdateCylinder from "./components/entity/updatecylinder";
+import UpdateCylinder from "./components/updatecylinder";
 import "bootstrap/dist/css/bootstrap.css";
 import { Route, Switch, Redirect } from "react-router-dom";
 
@@ -20,7 +20,7 @@ function App() {
         <Route path="/register" component={Register} />
         <Route path="/cylinders" component={Cylinder} />
         <Route exact path='/cylinder/add' component={AddCylinder} />
-        <Route path="/cylinders/update/:cylinderid" component={UpdateCylinder} />
+        <Route exact path='/cylinder/update/:cylinderId' component={UpdateCylinder} />
         <Route component={PageNotFound}/>
         <Redirect exact path="/" to="/home" />
         <Route component={PageNotFound} />
