@@ -19,8 +19,9 @@ function App() {
         <Route path="/login" component={Login} />
         <Route path="/register" component={Register} />
         <Route path="/cylinders" component={Cylinder} />
+        <Route exact path='/cylinder/updateCylinder/:cylinderId' component={UpdateCylinder} />
         <Route exact path='/cylinder/add' component={AddCylinder} />
-        <Route exact path='/cylinder/update/:cylinderId' component={UpdateCylinder} />
+        
         <Route component={PageNotFound}/>
         <Redirect exact path="/" to="/home" />
         <Route component={PageNotFound} />

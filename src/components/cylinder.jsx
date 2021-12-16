@@ -50,7 +50,7 @@ class Cylinder extends React.Component {
                                     to="/cylinder/add"
                                     className="btn btn-success mt-3 btn-md float-end mb-3"
                                 >
-                                    <i class="fas fa-user"/>&nbsp;&nbsp;
+                                    <i class="fas fa-user"/>
                                     Add Cylinder
                                 </Link>
                                 <table className="table table-condensed table-sm table-light table-hover table-striped text-center border-warning">
@@ -85,7 +85,7 @@ class Cylinder extends React.Component {
                                                         </td>
                                                       
                                                         <td>
-                                                           <Link to={'/cylinder/update/${s.cylinderId}'}
+                                                           <Link to={`cylinder/updateCylinder/${s.cylinderId}`}
                                                            className="btn btn-primary"
                                                            >
                                                                Update

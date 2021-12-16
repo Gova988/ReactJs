@@ -4,7 +4,7 @@ import axios from "axios";
 class UpdateCylinder extends React.Component {
   state = {
     cylinder: {
-      cylinderId: "",
+    
       type: "",
       weight: "",
       strapColor: "",
@@ -16,13 +16,13 @@ class UpdateCylinder extends React.Component {
     axios.get(dataUrl).then((response) => {
         console.log(response.data);
         this.setState({
-            ...this.state.cylinder,
+          ...this.state.cylinder,
             cylinder : response.data
         })
     })
       .catch((err) => console.log(err));
   }
-  updateInput = (event) => {
+  handleChange = (event) => {
     this.setState({
         cylinder: {
             ...this.state.cylinder,
@@ -40,17 +40,17 @@ class UpdateCylinder extends React.Component {
             .then((response) => {
                 console.log(response.data);
                 alert(
-                    "Update Customer details " +
-                        this.state.cylinder.cylinderId +
+                    "Update Cylinder details " +
+                        this.state.cylinder.type +
                         " successfully !!!"
                 );
-                this.props.history.push("/cylinder");
+                this.props.history.push("/cylinders");
             })
       .catch((err) => console.log(err));
   };
   render() {
     // Object Destructuring
-    const { cylinderId,type,weight,strapColor,price } = this.state.cylinder;
+    const { type,weight,strapColor,price } = this.state.cylinder;
 
     return (
       <div>
@@ -58,21 +58,7 @@ class UpdateCylinder extends React.Component {
           onSubmit={this.handleSubmit}
           className="w-50 mx-auto shadow p-3 mb-5 bg-body rounded mt-3"
         >
-          <div className="mb-3">
-            <label htmlFor="cylinderId" className="form-label">
-              cylinderId
-            </label>
-            <input
-              type="text"
-              className="form-control"
-              id="cylinderId"
-              aria-describedby="cylinderId"
-              value={cylinderId}
-              name="cylinderId"
-              onChange={this.handleChange}
-            />
-          </div>
-
+         
           <div className="mb-3">
             <label htmlFor="type" className="form-label">
               type
@@ -81,7 +67,7 @@ class UpdateCylinder extends React.Component {
               type="text"
               className="form-control"
               id="type"
-              aria-describedby=""
+            
               value={type}
               name="type"
               onChange={this.handleChange}
@@ -96,7 +82,7 @@ class UpdateCylinder extends React.Component {
               type="text"
               className="form-control"
               id="weight"
-              aria-describedby=""
+             
               value={weight}
               name="weight"
               onChange={this.handleChange}
@@ -111,7 +97,7 @@ class UpdateCylinder extends React.Component {
               type="text"
               className="form-control"
               id="strapColor"
-              aria-describedby=""
+              
               value={strapColor}
               name="strapColor"
               onChange={this.handleChange}
@@ -126,14 +112,14 @@ class UpdateCylinder extends React.Component {
               type="text"
               className="form-control"
               id="price"
-              aria-describedby=""
+              
               value={price}
               name="price"
               onChange={this.handleChange}
             />
           </div>
           <div className="d-grid gap-2 mt-3">
-            <button type="submit" className="btn btn-primary">-
+            <button type="submit" className="btn btn-primary">
               Submit
             </button>
           </div>
