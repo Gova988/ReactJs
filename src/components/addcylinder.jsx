@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { Component } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
-// import { Joi } from 'joi-browser';
+import {Link }  from 'react-router-dom';
+import Joi from "joi-browser";
 
 class AddCylinder extends React.Component {
     state = {
@@ -15,6 +15,25 @@ class AddCylinder extends React.Component {
         errors: {},
         errorMsg: "",
     };
+       schema = {
+        type: Joi.string().min(3).max(20).required(),
+        weight: Joi.number().integer().required(),
+        strapColor: Joi.string().min(3).max(20).required(),
+        price: Joi.number().integer().required(),
+    }; 
+    validate = () => {
+        const errors = {};
+        const result = Joi.validate(this.state.cylinder, this.schema, {
+          abortEarly: false,
+        });
+
+        console.log(result);
+        if (result.error != null)
+      for (let item of result.error.details) {
+        errors[item.path[0]] = item.message;
+      }
+    return Object.keys(errors).length === 0 ? null : errors;
+  };
     updateInput = (event) => {
         this.setState({
             cylinder: {
@@ -26,6 +45,7 @@ class AddCylinder extends React.Component {
     };
     handleSubmit = (event) => {
         event.preventDefault();
+        this.setState({ errors: this.validate() })
         console.log("Handle Submit");
 
        
@@ -157,14 +177,12 @@ class AddCylinder extends React.Component {
                                                 <small>{errors.price}</small>
                                             )}
                                         </div>
-                                        <div className="d-grid gap-2 mt-2">
-                                            <button
-                                                type="submit"
-                                                className="btn btn-success btn-md text-black fw-bold"
-                                            >
-                                                Submit
-                                            </button>
-                                        </div>
+                                     
+                                        <div className="d-grid gap-2 mt-3">
+                                          <button type="submit" className="btn btn-primary">
+                                              Submit
+                                           </button>
+                                         </div>
                                     </form>
                                 </div>
                             </div>

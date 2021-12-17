@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
-
+import  Joi  from "joi-browser";
 class UpdateCylinder extends React.Component {
   state = {
     cylinder: {
@@ -11,6 +11,25 @@ class UpdateCylinder extends React.Component {
       price: "",
     },
   };
+  schema = {
+    type: Joi.string().min(3).max(20).required(),
+    weight: Joi.number().integer().required(),
+    strapColor: Joi.string().min(3).max(20).required(),
+    price: Joi.number().integer().required(),
+}; 
+validate = () => {
+    const errors = {};
+    const result = Joi.validate(this.state.cylinder, this.schema, {
+      abortEarly: false,
+    });
+
+    console.log(result);
+    if (result.error != null)
+  for (let item of result.error.details) {
+    errors[item.path[0]] = item.message;
+  }
+return Object.keys(errors).length === 0 ? null : errors;
+};
   componentDidMount() {
     const dataUrl = `http://localhost:8080/cylinder/getSingleCylinder/${this.props.match.params.cylinderId}`;
     axios.get(dataUrl).then((response) => {
@@ -32,6 +51,7 @@ class UpdateCylinder extends React.Component {
 };
   handleSubmit = (event) => {
     event.preventDefault();
+    this.setState({ errors: this.validate() })
     console.log("Handle Submit");
     // Send post request to rest api
     const dataUrl = `http://localhost:8080/cylinder/updateCylinder/${this.props.match.params.cylinderId}`;
